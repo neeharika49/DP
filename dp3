@@ -59,3 +59,55 @@ int main() {
     }
     cout<<equalSumPartition(arr,n,dp);
 }
+
+CODE:BOTTOM-UP APPROACH
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin>>n;
+    int sum;
+    bool dp[100][100];
+    int arr[100];
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+      sum=sum+arr[i];   
+    }
+    int x=(sum/2);
+    if(sum%2!=0)
+    {
+        return false;
+    }
+    if(sum%2==0)
+    {
+     for(int i=0;i<=n;i++)
+     {
+        dp[i][0]=true;
+    }
+    for(int i=0;i<=x;i++)
+    {
+        dp[0][i]=false;
+    }
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=x;j++)
+        { if(arr[i-1]<=j)
+           {
+             dp[i][j]=dp[i-1][j-arr[i-1]] || dp[i-1][j];
+        
+           }
+           else 
+             {
+                 dp[i][j]=dp[i-1][j];
+             }
+           }
+    }
+    }
+    cout<<dp[n][x];
+}
