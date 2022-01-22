@@ -30,7 +30,6 @@ bool subsetSum(int arr[],int n,int sum,bool dp[][100])
     else
     
         return dp[n][sum]=subsetSum(arr,n-1,sum,dp);
-    
 }
 bool equalSumPartition(int a[],int n,bool dp[][100])
 {
