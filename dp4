@@ -9,8 +9,43 @@ All the possible subsets are {1, 2, 3},
 
 Input: arr[] = {1, 1, 1, 1}, X = 1 
 Output: 4 
+CODE: BOTTOM-UP APPROACH
+#include <iostream>
 
+using namespace std;
+int CountsubsetSum(int arr[],int sum,int dp[][100],int n)
+{  
+    if(sum==0)
+    {
+        return 1;
+    }
+    if(n==0)
+    {
+         return 0;
+    }
+    if(arr[n-1]<=sum)
+    {
+       return dp[n][sum]=CountsubsetSum(arr,sum-arr[n-1],dp,n-1) +CountsubsetSum(arr,sum,dp,n-1);
+    }
+     else
+     return dp[n][sum]=CountsubsetSum(arr,sum,dp,n-1);
+}
 
+int main() {
+    int a[100];
+    int t[100][100];
+    
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    int sum;
+    cin>>sum;
+    
+    cout<<CountsubsetSum(a,sum,t,n);
+}
 
 
 
