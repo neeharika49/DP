@@ -1,0 +1,136 @@
+Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
+
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+For example, "ace" is a subsequence of "abcde".
+A common subsequence of two strings is a subsequence that is common to both strings.
+
+ 
+
+Example 1:
+
+Input: text1 = "abcde", text2 = "ace" 
+Output: 3  
+Explanation: The longest common subsequence is "ace" and its length is 3.
+Example 2:
+
+Input: text1 = "abc", text2 = "abc"
+Output: 3
+Explanation: The longest common subsequence is "abc" and its length is 3.
+Example 3:
+
+Input: text1 = "abc", text2 = "def"
+Output: 0
+Explanation: There is no such common subsequence, so the result is 0.
+
+
+
+
+
+
+#CODE:
+-->RECURSION APPROACH
+#include <iostream>
+
+using namespace std;
+int longestCommonSubsequence(string text1, string text2,int m,int n) {
+        
+        if(n==0 ||m==0)
+        {
+            return 0;
+        }
+        if(text1[m-1]==text2[n-1])
+        {
+            return 1+longestCommonSubsequence(text1,text2,m-1,n-1);
+                
+        }
+        else
+        {
+          return max(longestCommonSubsequence(text1,text2,m-1,n),longestCommonSubsequence(text1,text2,m,n-1));
+        }
+        
+    }
+
+int main() {
+    string x,y;
+    cin>>x>>y;
+    int a=x.size();
+    int b=y.size();
+
+    cout<<longestCommonSubsequence(x,y,a,b);
+    }
+    
+    #BOTTOM-UP APPROACH(MEMOIZATION)
+   
+   
+   #include <bits/stdc++.h>
+
+    using namespace std;
+     int longestCommonSubsequence(string text1, string text2,int m,int n, vector<vector<int>> &t) {
+        if(m==0|| n==0)
+       {
+           return 0;
+       }
+        if(t[m][n]!=-1)
+        {
+            return t[m][n];
+        }
+        if(text1[m-1]==text2[n-1])
+        {
+            return t[m][n]=1+longestCommonSubsequence(text1,text2,m-1,n-1,t);
+        }
+        else 
+            return t[m][n]=max(longestCommonSubsequence(text1,text2,m,n-1,t),longestCommonSubsequence(text1,text2,m-1,n,t));
+    }
+
+     int main() {
+    string x,y;
+    cin>>x>>y;
+    int a=x.size();
+    int b=y.size();
+    vector<vector<int>> dp(a+1,vector<int>(b+1));
+    
+    for(int i=0;i<=a;i++)
+        {
+            for(int j=0;j<=b;j++)
+            {
+                dp[i][j]=-1;
+            }
+        }
+
+    cout<<longestCommonSubsequence(x,y,a,b,dp);
+}
+
+#TOP-DOWN APPROACH
+int longestCommonSubsequence(string text1, string text2) {
+        int m=text1.size();
+        int n=text2.size();
+        vector<vector<int>>tp(m+1,vector<int>(n+1));
+        for(int i=0;i<m+1;i++)
+        {
+            for(int j=0;j<n+1;j++)
+            {
+                if(i==0||j==0)
+                {
+                    tp[i][j]=0;
+                }
+            }
+        }
+        for(int i=1;i<m+1;i++)
+        {
+          for(int j=1;j<n+1;j++)
+          {
+              if(text1[i-1]==text2[j-1])
+              {
+                  tp[i][j]=1+tp[i-1][j-1];
+              }
+              else
+                  tp[i][j]=max(tp[i-1][j],tp[i][j-1]);
+          }
+        }
+                  
+        return tp[m][n];
+    }
+
+
+
