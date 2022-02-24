@@ -63,7 +63,7 @@ int find(int i,vector<int> nums,int prev)
  //TOP-DOWN CODE:
  
  
- nt lengthOfLIS(vector<int>& a) {
+ int lengthOfLIS(vector<int>& a) {
         vector<int> l(a.size(),0);
         l[0]=1;
         int n=a.size();
