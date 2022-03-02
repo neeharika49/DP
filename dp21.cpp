@@ -77,7 +77,8 @@ Example 2:
 Input: str1 = "aaaaaaaa", str2 = "aaaaaaaa"
 Output: "aaaaaaaa"*/
 
-//CODE:
+//CODE
+
 
 
 string shortestCommonSupersequence(string str1, string str2) {
