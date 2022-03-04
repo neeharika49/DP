@@ -29,7 +29,7 @@ Expected Auxiliary Space: O(1)
 
 
 Constraints:
-1<= |A|,|B| <=104Given two strings A and B, find if A is a subsequence of B.
+1<= |A|,|B| <=104Given two strings A and B, find if A is a subsequence of B
 
 
 */
